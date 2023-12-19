@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>App</title>
+</head>
+<body>
+
+    <div class="split left">
+        <div class="centered">
+            <img src="../static/products/prod1.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="split right">
+        <div class="container mt-5 mb-5">
+            <div class="d-flex justify-content-center row">
+                <div class="d-flex flex-column col-md-8">
+                        <p>
+                            positive : {{positive}}
+
+                        <br>
+                            negative : {{negative}}
+                        
+                        </p>
+
+                    <div>
+                        <form method="post">
+                          <textarea name="text"></textarea>
+                          <input type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment-bottom bg-white p-2 px-4">
+            <!-- Move these block tags outside of the previous div -->
+            {% block content %}
+                <!-- Display other content as needed -->
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sentence</th>
+                            <th>Sentiment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for index, row in output_df.iterrows() %}
+                            <tr>
+                                <td>{{ row['Sentence'] }}</td>
+                                <td>{{ row['Sentiment'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Display other content as needed -->
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>
