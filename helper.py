@@ -60,11 +60,20 @@ def vectorizer(ds, vocabulary):
         
     vectorized_lst_new = np.asarray(vectorized_lst, dtype=np.float32)
     return vectorized_lst_new
+# Define the thresholds for categorization
+negative_threshold = 0.4
+positive_threshold = 0.7
 
+# Categorize the results
+def categorize(probability):
+    if probability < negative_threshold:
+        return 'negative'
+    elif negative_threshold <= probability < positive_threshold:
+        return 'neutral'
+    else:
+        return 'positive'
+    
 def get_prediction(vectorized_text):
     vectorized_text = vectorized_text.reshape(1, -1)
-    prediction = model.predict(vectorized_text)
-    if prediction == 1:
-        return 'positive'
-    else:
-        return 'negative'
+    prediction_score = model.predict_proba(vectorized_text)
+    return prediction_score
