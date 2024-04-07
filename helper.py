@@ -62,7 +62,7 @@ def vectorizer(ds, vocabulary):
     return vectorized_lst_new
 # Define the thresholds for categorization
 negative_threshold = 0.4
-positive_threshold = 0.7
+positive_threshold = 0.6
 
 # Categorize the results
 def categorize(probability):

@@ -14,6 +14,11 @@ negative = 0
 neutral = 0 
 
 @app.route("/")
+
+
+
+
+
 def index():
     data['positive'] = positive
     data['neutral'] = neutral
@@ -44,6 +49,7 @@ def my_post():
             prediction_scores = get_prediction(vectorized_sentence)
 
             prediction = categorize(prediction_scores[0, 1])
+            logging.info(f'Prediction Score : {prediction_scores}')
             logging.info(f'Prediction : {prediction}')
  
             rows.append({'Sentence': sentence, 'Sentiment': prediction})
@@ -80,6 +86,18 @@ def my_post():
             positive+=1
   
     return render_template('index.html', data=data, output_df=output_df, output = output, positive= positive, negative = negative, neutral = neutral)
+
+@app.route('/about')
+def about():
+   
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+   
+    return render_template('contact.html')
+
+
 
 if __name__ == "__main__":
     app.run()
